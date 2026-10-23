@@ -1,0 +1,7 @@
+{"quoteResponse":{"result":[
+{"symbol":"AAPL","shortName":"Apple Inc.","longName":"Apple Inc.","regularMarketPrice":190.5,"regularMarketPreviousClose":187.0,"regularMarketOpen":188.0,"regularMarketDayHigh":191.0,"regularMarketDayLow":187.5,"regularMarketVolume":50000000,"marketCap":3000000000000,"fiftyTwoWeekHigh":199.6,"fiftyTwoWeekLow":124.2,"trailingPE":31.2,"epsTrailingTwelveMonths":6.1,"trailingAnnualDividendYield":0.0051,"currency":"USD","quoteType":"EQUITY","fullExchangeName":"NasdaqGS","exchange":"NMS","marketState":"REGULAR","exchangeTimezoneName":"America/New_York"},
+{"symbol":"VOD.L","shortName":"VODAFONE GROUP PLC","regularMarketPrice":72.5,"regularMarketPreviousClose":71.0,"regularMarketOpen":71.0,"regularMarketDayHigh":73.0,"regularMarketDayLow":70.5,"fiftyTwoWeekHigh":95.0,"fiftyTwoWeekLow":60.0,"epsTrailingTwelveMonths":-2.5,"currency":"GBp","quoteType":"EQUITY","fullExchangeName":"LSE","marketState":"CLOSED"},
+{"symbol":"EURUSD=X","shortName":"EUR/USD","regularMarketPrice":1.0851,"regularMarketPreviousClose":1.0830,"currency":"USD","quoteType":"CURRENCY","marketState":"REGULAR"},
+{"symbol":"BTC-USD","shortName":"Bitcoin USD","regularMarketPrice":43000.5,"regularMarketPreviousClose":42000,"currency":"USD","quoteType":"CRYPTOCURRENCY","marketState":"REGULAR"},
+{"symbol":"WEIRD","regularMarketPrice":null,"currency":null}
+],"error":null}}

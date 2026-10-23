@@ -1,0 +1,49 @@
+{
+  "trades": [
+    {
+      "base": "0.005000",
+      "counter": "1000.00",
+      "fee_base": "0.000000",
+      "fee_counter": "2.00",
+      "is_buy": false,
+      "order_id": "BXORDER0000001",
+      "pair": "XBTMYR",
+      "price": "200000.00",
+      "sequence": 111,
+      "timestamp": 1705287600000,
+      "trade_id": "T111",
+      "type": "BID",
+      "volume": "0.005000"
+    },
+    {
+      "base": "0.006000",
+      "counter": "1500.00",
+      "fee_base": "0.000000",
+      "fee_counter": "0.00",
+      "is_buy": false,
+      "order_id": "BXORDER0000002",
+      "pair": "XBTMYR",
+      "price": "250000.00",
+      "sequence": 222,
+      "timestamp": 1708401600000,
+      "trade_id": "T222",
+      "type": "BID",
+      "volume": "0.006000"
+    },
+    {
+      "base": "0.004000",
+      "counter": "900.00",
+      "fee_base": "0.000000",
+      "fee_counter": "0.00",
+      "is_buy": true,
+      "order_id": "BXORDER0000003",
+      "pair": "XBTMYR",
+      "price": "225000.00",
+      "sequence": 333,
+      "timestamp": 1709269200000,
+      "trade_id": "T333",
+      "type": "ASK",
+      "volume": "0.004000"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "1001",
+  "transactions": [
+    {
+      "row_index": 1,
+      "timestamp": 1704852000000,
+      "balance": 5000,
+      "available": 5000,
+      "balance_delta": 5000,
+      "available_delta": 5000,
+      "currency": "MYR",
+      "kind": "TRANSFER",
+      "reference": "T-DEP1",
+      "description": "Deposit from bank",
+      "account_id": "1001"
+    },
+    {
+      "row_index": 2,
+      "timestamp": 1705287600000,
+      "balance": 4000,
+      "available": 4000,
+      "balance_delta": -1000,
+      "available_delta": -1000,
+      "currency": "MYR",
+      "kind": "EXCHANGE",
+      "reference": "X-BUY1",
+      "description": "Bought 0.005 XBT",
+      "account_id": "1001",
+      "detail_fields": {
+        "trade_details": {
+          "pair": "XBTMYR",
+          "price": "200000.00",
+          "volume": "0.005000",
+          "sequence": 111
+        }
+      }
+    },
+    {
+      "row_index": 3,
+      "timestamp": 1705287600000,
+      "balance": 3998,
+      "available": 3998,
+      "balance_delta": -2,
+      "available_delta": -2,
+      "currency": "MYR",
+      "kind": "FEE",
+      "reference": "X-BUY1",
+      "description": "Trading fee",
+      "account_id": "1001"
+    },
+    {
+      "row_index": 4,
+      "timestamp": 1708401600000,
+      "balance": 2498,
+      "available": 2498,
+      "balance_delta": -1500,
+      "available_delta": -1500,
+      "currency": "MYR",
+      "kind": "EXCHANGE",
+      "reference": "X-BUY2",
+      "description": "Bought 0.006 XBT",
+      "account_id": "1001",
+      "detail_fields": {
+        "trade_details": {
+          "pair": "XBTMYR",
+          "price": "250000.00",
+          "volume": "0.006000",
+          "sequence": 222
+        }
+      }
+    },
+    {
+      "row_index": 5,
+      "timestamp": 1709269200000,
+      "balance": 3398,
+      "available": 3398,
+      "balance_delta": 900,
+      "available_delta": 900,
+      "currency": "MYR",
+      "kind": "EXCHANGE",
+      "reference": "X-SELL1",
+      "description": "Sold 0.004 XBT",
+      "account_id": "1001",
+      "detail_fields": {
+        "trade_details": {
+          "pair": "XBTMYR",
+          "price": "225000.00",
+          "volume": "0.004000",
+          "sequence": 333
+        }
+      }
+    },
+    {
+      "row_index": 6,
+      "timestamp": 1709618400000,
+      "balance": 2398,
+      "available": 2398,
+      "balance_delta": -1000,
+      "available_delta": -1000,
+      "currency": "MYR",
+      "kind": "TRANSFER",
+      "reference": "T-WD1",
+      "description": "Withdrawal to bank",
+      "account_id": "1001"
+    },
+    {
+      "row_index": 7,
+      "timestamp": 1710054000000,
+      "balance": 1598,
+      "available": 1598,
+      "balance_delta": -800,
+      "available_delta": -800,
+      "currency": "MYR",
+      "kind": "EXCHANGE",
+      "reference": "X-BUY3",
+      "description": "Bought 0.1 ETH",
+      "account_id": "1001",
+      "detail_fields": {
+        "trade_details": {
+          "pair": "ETHMYR",
+          "price": "8000.00",
+          "volume": "0.100000",
+          "sequence": 444
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "1002",
+  "currency": "XBT",
+  "name": "Bitcoin Wallet",
+  "pending": [
+    {
+      "timestamp": 1715385600000,
+      "balance": 0.01495,
+      "available": 0.01495,
+      "balance_delta": 0.001,
+      "available_delta": 0,
+      "currency": "XBT",
+      "kind": "TRANSFER",
+      "description": "Incoming, 1 confirmation",
+      "account_id": "1002"
+    }
+  ],
+  "transactions": []
+}

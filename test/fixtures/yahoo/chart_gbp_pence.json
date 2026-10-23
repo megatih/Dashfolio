@@ -1,0 +1,3 @@
+{"chart":{"result":[{"meta":{"currency":"GBp","symbol":"VOD.L","exchangeTimezoneName":"Europe/London","gmtoffset":0,"instrumentType":"EQUITY","regularMarketPrice":72.5},
+"timestamp":[1704182400,1704268800],
+"indicators":{"quote":[{"open":[70.0,71.0],"high":[71.5,73.0],"low":[69.5,70.5],"close":[71.0,72.5],"volume":[5000,6000]}]}}],"error":null}}

@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Format, analyze & test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.7
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - name: Generated code is up to date
+        run: |
+          dart run build_runner build
+          git diff --exit-code -- '*.g.dart' drift_schemas/ test/generated_migrations/
+      - name: Format
+        run: |
+          files=$(find lib test integration_test tool -name '*.dart' ! -name '*.g.dart' ! -path '*/generated_migrations/*')
+          dart format --output=none --set-exit-if-changed $files
+      - name: Analyze
+        run: flutter analyze --fatal-infos
+      - name: Unit & widget tests (goldens run on macOS)
+        run: flutter test --exclude-tags golden --coverage
+      - name: Coverage gates
+        run: dart run tool/check_coverage.dart coverage/lcov.info --domain 90 --overall 70
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/lcov.info
+
+  goldens:
+    name: Golden tests
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.7
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: flutter test --tags golden
+
+  proxy:
+    name: Proxy typecheck & tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: proxy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: proxy/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+
+  build:
+    name: Build ${{ matrix.target }}
+    needs: quality
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { target: web, os: ubuntu-latest, cmd: "flutter build web --dart-define=BUILD_DATE=$BUILD_DATE" }
+          - { target: linux, os: ubuntu-latest, cmd: "flutter build linux --dart-define=BUILD_DATE=$BUILD_DATE", linux: true }
+          - { target: windows, os: windows-latest, cmd: "flutter build windows --dart-define=BUILD_DATE=$BUILD_DATE" }
+          - { target: macos, os: macos-latest, cmd: "flutter build macos --dart-define=BUILD_DATE=$BUILD_DATE" }
+          - { target: ios, os: macos-latest, cmd: "flutter build ios --no-codesign --dart-define=BUILD_DATE=$BUILD_DATE" }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.7
+          channel: stable
+          cache: true
+      - name: Linux build dependencies
+        if: matrix.linux == true
+        run: sudo apt-get update && sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libsecret-1-dev libjsoncpp-dev
+      - run: flutter pub get
+      - name: Stamp build date
+        shell: bash
+        run: echo "BUILD_DATE=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
+      - name: Build
+        shell: bash
+        run: ${{ matrix.cmd }}

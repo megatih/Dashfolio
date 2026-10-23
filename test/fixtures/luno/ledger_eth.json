@@ -1,0 +1,26 @@
+{
+  "id": "1003",
+  "transactions": [
+    {
+      "row_index": 1,
+      "timestamp": 1710054000000,
+      "balance": 0.1,
+      "available": 0.1,
+      "balance_delta": 0.1,
+      "available_delta": 0.1,
+      "currency": "ETH",
+      "kind": "EXCHANGE",
+      "reference": "X-BUY3",
+      "description": "Bought 0.1 ETH",
+      "account_id": "1003",
+      "detail_fields": {
+        "trade_details": {
+          "pair": "ETHMYR",
+          "price": "8000.00",
+          "volume": "0.100000",
+          "sequence": 444
+        }
+      }
+    }
+  ]
+}

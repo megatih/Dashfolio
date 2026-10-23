@@ -1,0 +1,43 @@
+{
+  "markets": [
+    {
+      "market_id": "XBTMYR",
+      "base_currency": "XBT",
+      "counter_currency": "MYR",
+      "min_volume": "0.0005",
+      "max_volume": "100",
+      "min_price": "1",
+      "max_price": "10000000",
+      "volume_scale": 6,
+      "price_scale": 0,
+      "fee_scale": 2,
+      "trading_status": "ACTIVE"
+    },
+    {
+      "market_id": "ETHMYR",
+      "base_currency": "ETH",
+      "counter_currency": "MYR",
+      "min_volume": "0.01",
+      "max_volume": "1000",
+      "min_price": "1",
+      "max_price": "1000000",
+      "volume_scale": 4,
+      "price_scale": 0,
+      "fee_scale": 2,
+      "trading_status": "ACTIVE"
+    },
+    {
+      "market_id": "ETHXBT",
+      "base_currency": "ETH",
+      "counter_currency": "XBT",
+      "min_volume": "0.01",
+      "max_volume": "1000",
+      "min_price": "0.0001",
+      "max_price": "1",
+      "volume_scale": 4,
+      "price_scale": 6,
+      "fee_scale": 2,
+      "trading_status": "POST_ONLY"
+    }
+  ]
+}

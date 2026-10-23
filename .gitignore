@@ -1,0 +1,82 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+*~
+.DS_Store
+Thumbs.db
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IDEs (personal settings)
+*.iml
+*.ipr
+*.iws
+.idea/
+.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Widget Preview related
+.widget_preview/
+
+# Golden test failure output
+**/failures/
+
+# Release artefacts
+/dist/
+*.dmg
+*.zip
+*.tar.gz
+
+# Secrets and signing material: never commit these
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+*.cer
+*.jks
+*.keystore
+key.properties
+*.mobileprovision
+*.provisionprofile
+GoogleService-Info.plist
+google-services.json
+**/.dev.vars
+**/.wrangler/
+
+# Node (proxy/)
+**/node_modules/
+
+# Recording of a real Luno account (scrubbed, but still personal). Record locally with tool/record_luno_fixtures.dart
+/test/fixtures/luno/live/

@@ -1,0 +1,31 @@
+{
+  "balance": [
+    {
+      "account_id": "1001",
+      "asset": "MYR",
+      "balance": "1598.00",
+      "reserved": "0.00",
+      "unconfirmed": "0.00",
+      "name": "MYR Wallet",
+      "account_type": "TRANSACTIONAL"
+    },
+    {
+      "account_id": "1002",
+      "asset": "XBT",
+      "balance": "0.01395000",
+      "reserved": "0.00100000",
+      "unconfirmed": "0.00000000",
+      "name": "Bitcoin Wallet",
+      "account_type": "TRANSACTIONAL"
+    },
+    {
+      "account_id": "1003",
+      "asset": "ETH",
+      "balance": "0.10000000",
+      "reserved": "0.00000000",
+      "unconfirmed": "0.00000000",
+      "name": "Ethereum Wallet",
+      "account_type": "TRANSACTIONAL"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "transfers": [
+    {
+      "id": "TR2",
+      "created_at": 1715335200000,
+      "amount": "0.01000000",
+      "fee": "0.00000000",
+      "inbound": true,
+      "transaction_id": "d4e5f6scrubbed"
+    },
+    {
+      "id": "TR1",
+      "created_at": 1711958400000,
+      "amount": "0.00200000",
+      "fee": "0.00010000",
+      "inbound": false,
+      "transaction_id": "a1b2c3scrubbed"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+name = "dashfolio-yahoo-proxy"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+[vars]
+# Comma-separated origins allowed to call the proxy from a browser. Use "*" only for local experiments.
+ALLOWED_ORIGINS = "http://localhost:8080,http://127.0.0.1:8080"

@@ -1,0 +1,6 @@
+{"quoteSummary":{"result":[{
+"summaryDetail":{"beta":{"raw":1.29,"fmt":"1.29"},"dividendYield":{"raw":0.0051,"fmt":"0.51%"},"trailingPE":{"raw":31.2,"fmt":"31.20"}},
+"defaultKeyStatistics":{"trailingEps":{"raw":6.1,"fmt":"6.10"}},
+"assetProfile":{"longBusinessSummary":"Designs smartphones.","website":"https://www.apple.com","sector":"Technology","industry":"Consumer Electronics","country":"United States","fullTimeEmployees":164000},
+"calendarEvents":{"exDividendDate":{"raw":1707436800,"fmt":"2024-02-09"},"dividendDate":{"raw":1708041600,"fmt":"2024-02-16"},"earnings":{"earningsDate":[{"raw":1706832000,"fmt":"2024-02-02"}]}}
+}],"error":null}}

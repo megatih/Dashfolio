@@ -1,0 +1,10 @@
+{"quotes":[
+{"symbol":"AAPL","shortname":"Apple Inc.","longname":"Apple Inc.","quoteType":"EQUITY","exchDisp":"NASDAQ","exchange":"NMS","isYahooFinance":true},
+{"symbol":"APLE","shortname":"Apple Hospitality REIT, Inc.","quoteType":"EQUITY","exchDisp":"NYSE","exchange":"NYQ"},
+{"symbol":"NOTYPE","shortname":"No Type"},
+{"shortname":"Missing symbol"}
+],
+"news":[
+{"uuid":"1","title":"Apple unveils something","publisher":"Reuters","link":"https://example.com/a","providerPublishTime":1704205800,"type":"STORY"},
+{"title":"No link","publisher":"X"}
+]}

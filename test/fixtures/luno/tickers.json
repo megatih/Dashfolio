@@ -1,0 +1,31 @@
+{
+  "tickers": [
+    {
+      "pair": "XBTMYR",
+      "timestamp": 1717243200000,
+      "bid": "299900.00",
+      "ask": "300100.00",
+      "last_trade": "300000.00",
+      "rolling_24_hour_volume": "12.345678",
+      "status": "ACTIVE"
+    },
+    {
+      "pair": "ETHMYR",
+      "timestamp": 1717243200000,
+      "bid": "11990.00",
+      "ask": "12010.00",
+      "last_trade": "12000.00",
+      "rolling_24_hour_volume": "88.1",
+      "status": "ACTIVE"
+    },
+    {
+      "pair": "ETHXBT",
+      "timestamp": 1717243200000,
+      "bid": "0.0399",
+      "ask": "0.0401",
+      "last_trade": "0.04",
+      "rolling_24_hour_volume": "5",
+      "status": "POSTONLY"
+    }
+  ]
+}
