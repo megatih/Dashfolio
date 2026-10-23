@@ -198,7 +198,10 @@ jobs:
           $crt = Get-ChildItem (Join-Path $redist.FullName $arch) -Directory -Filter 'Microsoft.VC14*.CRT' | Select-Object -First 1
           if (-not $crt) { throw "No $arch VC++ runtime under $($redist.FullName)" }
           Write-Host "VC++ runtime from $($crt.FullName)"
+          # arm64 code never imports vcruntime140_1.dll (x64-only exception-handling runtime), and the arm64 redist folder
+          # ships an x64 copy of it, so leave it out there.
           Get-ChildItem $crt.FullName -File | Where-Object { $_.Name -match '^(msvcp140|vcruntime140)' } |
+            Where-Object { -not ($arch -eq 'arm64' -and $_.Name -eq 'vcruntime140_1.dll') } |
             Copy-Item -Destination $release -Verbose
 
           function Get-Machine([string]$path) {
