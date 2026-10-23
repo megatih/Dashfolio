@@ -25,15 +25,25 @@ See [`SPEC.md`](SPEC.md) for the full specification and implementation notes.
 
 ## Download
 
-Grab the latest build for your desktop from the [Releases page](https://github.com/megatih/Dashfolio/releases/latest):
+Grab the latest build from the [Releases page](https://github.com/megatih/Dashfolio/releases/latest):
 
 | Platform | Asset | Notes |
 |---|---|---|
-| macOS | `Dashfolio-<version>-macos.dmg` / `.zip` | Unsigned: right-click the app → **Open**, or run `xattr -dr com.apple.quarantine /Applications/Dashfolio.app` |
-| Windows | `Dashfolio-<version>-windows-x64.zip` | Unzip and run `dashfolio.exe`. SmartScreen may warn because the build is unsigned |
-| Linux | `Dashfolio-<version>-linux-x64.tar.gz` | Needs `libgtk-3-0` and `libsecret-1-0` (and an unlocked Secret Service for Luno) |
+| macOS (Apple silicon & Intel) | `Dashfolio-<version>-macos.dmg` / `.zip` | Unsigned: right-click the app → **Open**, or run `xattr -dr com.apple.quarantine /Applications/Dashfolio.app` |
+| Windows x64 | `Dashfolio-<version>-windows-x64.zip` | Unzip and run `dashfolio.exe`. SmartScreen may warn because the build is unsigned |
+| Windows arm64 | `Dashfolio-<version>-windows-arm64.zip` | Native build for Snapdragon X and NVIDIA RTX Spark / N1X laptops. The x64 zip also runs there under emulation, but slower |
+| Linux x64 / arm64 | `Dashfolio-<version>-linux-x64.AppImage`, `…-linux-arm64.AppImage` | `chmod +x` it and run it (see below) |
+| Linux x64 | `Dashfolio-<version>-linux-x64.tar.gz` | Plain bundle for distros without AppImage support |
 
-Each release includes `SHA256SUMS.txt`. iOS and web are built from source (see below).
+Each release includes `SHA256SUMS.txt`. The Windows zips include the Visual C++ runtime, so nothing else needs installing. iOS and web are built from source (see below).
+
+**Linux AppImage.** Built on Ubuntu 22.04, so it needs glibc 2.35+ (Ubuntu 22.04, Debian 12 or newer), GTK 3 and `libsecret-1-0` (plus an unlocked
+Secret Service to connect Luno). Ubuntu 22.04+ also needs `libfuse2` to run AppImages (or start it with `--appimage-extract-and-run`).
+
+On first run it adds a Dashfolio entry and icons to your GNOME / KDE application menu (`~/.local/share/applications` and `~/.local/share/icons`). If
+you move the file, the next run re-points the entry. To opt out set `DASHFOLIO_NO_INTEGRATION=1`; to undo it run
+`./Dashfolio-<version>-linux-<arch>.AppImage --remove-desktop-integration` or choose **Remove from menu** on the menu entry. If you use Gear Lever or
+AppImageLauncher, Dashfolio leaves the integration to them. They can also update it in place from the embedded update information.
 
 ## Getting started
 
@@ -135,7 +145,7 @@ flutter test --coverage && dart run tool/check_coverage.dart coverage/lcov.info 
 
 ### Releasing
 
-Releases are built by [`release.yml`](.github/workflows/release.yml) for Linux, Windows and macOS. Update `version:` in `pubspec.yaml`, then:
+Releases are built by [`release.yml`](.github/workflows/release.yml) for Linux, Windows and macOS. Update `version:` in `pubspec.yaml` (and keep it in step with the tag), then:
 
 ```sh
 git tag v1.2.3 && git push origin v1.2.3
@@ -143,7 +153,9 @@ git tag v1.2.3 && git push origin v1.2.3
 
 The tag becomes the build name (`--build-name`), the workflow run number the build number, and the artifacts are attached to a new
 GitHub release with generated notes. Tags containing a hyphen (`v1.2.3-beta.1`) are marked as pre-releases. The workflow can also be run
-manually from the Actions tab to get the build artifacts without publishing a release.
+manually from the Actions tab to get the build artifacts without publishing a release. Changes under `linux/`, `windows/`, `macos/`
+or to `pubspec.*` and the workflow itself also run it on `main` and in pull requests, building every platform without publishing, so packaging
+breakage shows up before a tag. Linux AppImage packaging lives in `linux/packaging/`.
 
 Architecture (feature-first, layered):
 
@@ -176,5 +188,6 @@ fixtures in `test/fixtures/yahoo/` (hand-assembled to mirror real responses; re-
 - **macOS** — sandbox with outgoing network and user-selected file access entitlements. Secure storage uses the file keychain so unsigned debug builds work; moving Luno keys to the Data Protection keychain needs a signed build with a keychain access group.
 - **iOS** — Face ID usage description included. Run `pod install` on first build.
 - **Windows** — biometrics through Windows Hello (`local_auth`).
+- **Windows arm64** — built natively on a `windows-11-arm` runner with Flutter installed from git (Flutter publishes no arm64 SDK archive); the Visual C++ runtime is bundled.
 - **Linux** — secure storage needs `libsecret` and an unlocked Secret Service (GNOME Keyring, KWallet); without it Luno cannot be connected. No biometrics, PIN only.
 - **Web** — PIN lock only hides the screen; data lives in the browser's storage. Luno is not available.

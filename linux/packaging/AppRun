@@ -1,0 +1,84 @@
+#!/bin/sh
+# AppImage entry point: integrates Dashfolio with the desktop (menu entry + icons) on first run, then starts the app.
+#   DASHFOLIO_NO_INTEGRATION=1            never touch the desktop
+#   AppRun --remove-desktop-integration   undo the integration and exit
+HERE="$(dirname "$(readlink -f "$0")")"
+APP_ID="app.dashfolio.dashfolio"
+DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+ENTRY="$DATA_HOME/applications/$APP_ID.desktop"
+MARKER="X-Dashfolio-AppImage=true"
+
+refresh_caches() {
+  command -v update-desktop-database >/dev/null 2>&1 && update-desktop-database "$DATA_HOME/applications" >/dev/null 2>&1
+  command -v gtk-update-icon-cache >/dev/null 2>&1 && gtk-update-icon-cache -f -t "$DATA_HOME/icons/hicolor" >/dev/null 2>&1
+  # KDE's menu cache; harmless elsewhere.
+  { command -v kbuildsycoca6 >/dev/null 2>&1 && kbuildsycoca6 >/dev/null 2>&1; } ||
+    { command -v kbuildsycoca5 >/dev/null 2>&1 && kbuildsycoca5 >/dev/null 2>&1; }
+  return 0
+}
+
+remove_integration() {
+  # Only ever delete an entry this script wrote.
+  if [ -f "$ENTRY" ] && grep -qF "$MARKER" "$ENTRY"; then
+    rm -f "$ENTRY"
+    rm -f "$DATA_HOME"/icons/hicolor/*/apps/"$APP_ID".png
+    refresh_caches
+  fi
+}
+
+# Copy src to dst unless it is already identical. Sets CHANGED=1 when something was written.
+install_file() {
+  if ! cmp -s "$1" "$2" 2>/dev/null; then
+    mkdir -p "$(dirname "$2")" && cp "$1" "$2" && CHANGED=1
+  fi
+}
+
+integrate() {
+  [ -n "$APPIMAGE" ] && [ -f "$APPIMAGE" ] || return 0
+  [ -z "$DASHFOLIO_NO_INTEGRATION" ] || return 0
+  [ -d "$HERE/usr/share/icons/hicolor" ] || return 0
+
+  # Desktop Entry Exec strings need escaping that is easy to get wrong; paths like that are rare, so do not integrate.
+  case "$APPIMAGE" in
+    *'"'* | *'$'* | *'`'* | *'\'* | *'
+'*) return 0 ;;
+  esac
+  exec_path=$(printf '%s' "$APPIMAGE" | sed 's/%/%%/g')
+
+  # Another tool (Gear Lever, AppImageLauncher, ...) already integrated this file: leave it alone.
+  if [ -d "$DATA_HOME/applications" ]; then
+    for f in "$DATA_HOME"/applications/*.desktop; do
+      [ -f "$f" ] || continue
+      [ "$f" = "$ENTRY" ] && continue
+      grep -qF "$APPIMAGE" "$f" 2>/dev/null && return 0
+    done
+  fi
+
+  tmp=$(mktemp "${TMPDIR:-/tmp}/dashfolio-desktop.XXXXXX") || return 0
+  {
+    sed -e '/^Exec=/d' -e '/^TryExec=/d' "$HERE/usr/share/applications/$APP_ID.desktop"
+    printf 'Exec="%s"\n' "$exec_path"
+    printf 'TryExec=%s\n' "$APPIMAGE"
+    printf '%s\n' "$MARKER"
+    printf 'Actions=Remove;\n\n[Desktop Action Remove]\nName=Remove from menu\nExec="%s" --remove-desktop-integration\n' "$exec_path"
+  } >"$tmp"
+
+  CHANGED=
+  install_file "$tmp" "$ENTRY"
+  rm -f "$tmp"
+  for icon in "$HERE"/usr/share/icons/hicolor/*/apps/"$APP_ID".png; do
+    [ -f "$icon" ] || continue
+    size=$(basename "$(dirname "$(dirname "$icon")")")
+    install_file "$icon" "$DATA_HOME/icons/hicolor/$size/apps/$APP_ID.png"
+  done
+  [ -z "$CHANGED" ] || refresh_caches
+  return 0
+}
+
+if [ "$1" = "--remove-desktop-integration" ]; then
+  remove_integration
+  exit 0
+fi
+
+integrate
+exec "$HERE/usr/lib/dashfolio/dashfolio" "$@"

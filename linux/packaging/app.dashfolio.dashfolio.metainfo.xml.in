@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>app.dashfolio.dashfolio</id>
+  <name>Dashfolio</name>
+  <summary>Private portfolio dashboard for stocks, ETFs and crypto</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <description>
+    <p>
+      Dashfolio is a neumorphic portfolio dashboard for traders, analysts and personal investors. It tracks holdings,
+      transactions, performance, dividends and watchlists with Yahoo Finance data and, optionally, a read-only Luno account.
+    </p>
+    <p>Everything stays on your device: a local database, an optional app lock, and no accounts or telemetry.</p>
+  </description>
+  <launchable type="desktop-id">app.dashfolio.dashfolio.desktop</launchable>
+  <url type="homepage">https://github.com/megatih/Dashfolio</url>
+  <url type="bugtracker">https://github.com/megatih/Dashfolio/issues</url>
+  <categories>
+    <category>Office</category>
+    <category>Finance</category>
+  </categories>
+  <content_rating type="oars-1.1"/>
+  <provides>
+    <binary>dashfolio</binary>
+  </provides>
+  <releases>
+    <release version="@VERSION@" date="@DATE@"/>
+  </releases>
+</component>

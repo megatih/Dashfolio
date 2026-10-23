@@ -8,6 +8,7 @@ and deviations) and `README.md` first.
 - `flutter analyze` must stay at zero issues. Format with `dart format` (page width 140 from `analysis_options.yaml`).
 - `flutter test --exclude-tags golden` for unit/widget tests; `flutter test --tags golden` for goldens (macOS-generated).
 - `dart run build_runner build` after changing `lib/data/db/tables.dart`, then dump the schema and regenerate migration helpers (see README).
+- Linux AppImage packaging (AppRun with first-run desktop integration, desktop file, AppStream template, `build_appimage.sh`) lives in `linux/packaging/`; `release.yml` builds Linux x64/arm64 and Windows x64/arm64 (arm64 jobs install Flutter from git).
 - Proxy: `cd proxy && npm test && npm run typecheck`.
 
 ## Architecture

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.5
+Name=Dashfolio
+GenericName=Portfolio Tracker
+Comment=Track stocks, ETFs and crypto in a private portfolio dashboard
+Exec=dashfolio
+Icon=app.dashfolio.dashfolio
+Terminal=false
+Categories=Office;Finance;
+Keywords=portfolio;investing;stocks;crypto;dividends;finance;
+StartupWMClass=app.dashfolio.dashfolio
