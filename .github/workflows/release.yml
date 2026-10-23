@@ -233,7 +233,12 @@ jobs:
           APP="build/macos/Build/Products/Release/Dashfolio.app"
           ditto -c -k --sequesterRsrc --keepParent "$APP" "dist/Dashfolio-${VERSION}-macos.zip"
           mkdir dmg && cp -R "$APP" dmg/ && ln -s /Applications dmg/Applications
-          hdiutil create -volname Dashfolio -srcfolder dmg -ov -format UDZO "dist/Dashfolio-${VERSION}-macos.dmg"
+          # hdiutil sporadically fails with "Resource busy" on hosted runners: retry.
+          for attempt in 1 2 3 4 5; do
+            hdiutil create -volname Dashfolio -srcfolder dmg -ov -format UDZO "dist/Dashfolio-${VERSION}-macos.dmg" && break
+            [ "$attempt" = 5 ] && exit 1
+            sleep $((attempt * 5))
+          done
 
       - uses: actions/upload-artifact@v4
         with:
